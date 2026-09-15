@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Academia de Detectives Literarios | 6º Grado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-profundo: #1A365D;
+            --azul-claro: #2B6CB0;
+            --azul-turquesa: #0BC5EA;
+            --naranja-vibrante: #ED8936;
+            --naranja-oscuro: #DD6B20;
+            --rosa: #F687B3;
+            --morado: #9F7AEA;
+            --verde: #48BB78;
+            --fondo-claro: #F7FAFC;
+            --texto-oscuro: #2D3748;
+            --exito: #38A169;
+            --error: #E53E3E;
+            --amarillo: #ECC94B;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--texto-oscuro); 
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; margin-top: 0; }
+        
+        /* Header mejorado con imagen de fondo */
+        header { 
+            background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-claro) 100%); 
+            color: white; 
+            padding: 1.5rem 2rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        nav button { 
+            background: rgba(255,255,255,0.15); 
+            border: 2px solid rgba(255,255,255,0.3); 
+            color: white; 
+            margin-left: 8px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 0.9rem; 
+            padding: 10px 16px; 
+            border-radius: 25px; 
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        nav button:hover, nav button.activo { 
+            background: var(--naranja-vibrante); 
+            border-color: var(--naranja-vibrante);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
+        }
+
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        .seccion { display: none; animation: fadeIn 0.6s; }
+        .seccion.activa { display: block; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* Hero Section mejorada con imagen */
+        .hero { 
+            text-align: center; 
+            padding: 4rem 2rem; 
+            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-profundo) 100%), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200');
+            background-blend-mode: overlay;
+            background-size: cover;
+            background-position: center;
+            color: white; 
+            border-radius: 20px; 
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '🔍 📚 ️';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .hero h1 { 
+            color: white; 
+            font-size: 2.8rem; 
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            margin-bottom: 1rem;
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .progress-bar { 
+            background: rgba(255,255,255,0.3); 
+            border-radius: 15px; 
+            width: 80%; 
+            max-width: 500px; 
+            margin: 1.5rem auto; 
+            height: 25px; 
+            overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .progress-fill { 
+            background: linear-gradient(90deg, var(--naranja-vibrante) 0%, var(--rosa) 100%); 
+            height: 100%; 
+            border-radius: 15px; 
+            width: 0%; 
+            transition: width 0.8s ease;
+            box-shadow: 0 0 10px rgba(237, 137, 54, 0.6);
+        }
+
+        /* Tarjetas mejoradas */
+        .grid-actividades { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 2rem; 
+            margin-top: 2rem; 
+        }
+        .card { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+            border-left: 6px solid var(--naranja-vibrante); 
+            cursor: pointer; 
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--naranja-vibrante) 0%, transparent 100%);
+            opacity: 0.1;
+            border-radius: 0 0 0 100%;
+        }
+        .card:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+        .card.completada { 
+            border-left-color: var(--exito); 
+            opacity: 0.9;
+            background: linear-gradient(135deg, #F0FFF4 0%, white 100%);
+        }
+        .card.completada::after { 
+            content: '✅'; 
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+        }
+        .card h3 {
+            color: var(--azul-profundo);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Área de juego */
+        .area-juego { 
+            background: white; 
+            padding: 3rem; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2); 
+            display: none;
+            border: 3px solid var(--azul-claro);
+        }
+        .texto-base { 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+            padding: 2rem; 
+            border-radius: 12px; 
+            border-left: 6px solid var(--azul-claro); 
+            font-style: italic; 
+            margin-bottom: 2rem; 
+            font-size: 1.2rem; 
+            line-height: 1.8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .opciones { display: flex; flex-direction: column; gap: 12px; margin: 2rem 0; }
+        .btn-opcion { 
+            background: white; 
+            border: 3px solid var(--azul-claro); 
+            color: var(--azul-profundo); 
+            padding: 15px 25px; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            text-align: left; 
+            transition: all 0.3s; 
+            font-size: 1.05rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .btn-opcion:hover { 
+            background: var(--azul-claro); 
+            color: white;
+            transform: translateX(5px);
+        }
+        .btn-opcion.correcta { 
+            background: var(--exito); 
+            border-color: var(--exito); 
+            color: white;
+            animation: pulse 0.5s;
+        }
+        .btn-opcion.incorrecta { 
+            background: var(--error); 
+            border-color: var(--error); 
+            color: white;
+            animation: shake 0.5s;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        .retroalimentacion { 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            margin-top: 1.5rem; 
+            display: none; 
+            font-weight: 700; 
+            line-height: 1.6;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .retroalimentacion.exito { 
+            background: linear-gradient(135deg, #C6F6D5 0%, #9AE6B4 100%); 
+            color: #22543D; 
+            border: 3px solid var(--exito); 
+        }
+        .retroalimentacion.fallo { 
+            background: linear-gradient(135deg, #FED7D7 0%, #FEB2B2 100%); 
+            color: #742A2A; 
+            border: 3px solid var(--error); 
+        }
+
+        .btn-accion { 
+            background: linear-gradient(135deg, var(--naranja-vibrante) 0%, var(--naranja-oscuro) 100%); 
+            color: white; 
+            border: none; 
+            padding: 12px 30px; 
+            border-radius: 30px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 1.1rem; 
+            margin-top: 1.5rem;
+            box-shadow: 0 6px 15px rgba(237, 137, 54, 0.4);
+            transition: all 0.3s;
+        }
+        .btn-accion:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(237, 137, 54, 0.6);
+        }
+        .btn-secundario { 
+            background: linear-gradient(135deg, #718096 0%, #4A5568 100%); 
+            margin-right: 15px;
+            box-shadow: 0 6px 15px rgba(113, 128, 150, 0.4);
+        }
+
+        /* Sección de Videos mejorada */
+        .recurso-externo { 
+            background: white; 
+            padding: 2.5rem; 
+            border-radius: 16px; 
+            margin-bottom: 2rem; 
+            border-left: 6px solid var(--azul-claro);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .recurso-externo::before {
+            content: '🎬';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+        .video-link-card {
+            background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+        .video-link-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(255, 0, 0, 0.5);
+        }
+        .video-link-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .video-link-card .youtube-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Juegos Interactivos mejorados */
+        .juego-container { 
+            background: white; 
+            padding: 2.5rem; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2); 
+            margin-bottom: 3rem;
+            border: 4px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        .juego-container::before {
+            content: '';
+            position: absolute;
+            top: -4px; right: -4px; bottom: -4px; left: -4px;
+            background: linear-gradient(135deg, var(--morado), var(--rosa), var(--azul-turquesa));
+            border-radius: 24px;
+            z-index: -1;
+        }
+        .juego-header { 
+            background: linear-gradient(135deg, var(--morado) 0%, #6B46C1 100%); 
+            color: white; 
+            padding: 2rem; 
+            border-radius: 16px 16px 0 0; 
+            margin: -2.5rem -2.5rem 2rem -2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .juego-header::before {
+            content: '🎮 🎯 ';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+        .juego-header h3 { 
+            color: white; 
+            margin: 0; 
+            font-size: 1.8rem;
+        }
+        .juego-score { 
+            background: rgba(255,255,255,0.25); 
+            padding: 0.8rem 1.5rem; 
+            border-radius: 25px; 
+            display: inline-block; 
+            margin-top: 1rem;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+        }
+        .juego-pregunta { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            margin: 2rem 0; 
+            color: var(--azul-profundo);
+            line-height: 1.4;
+        }
+        .juego-opciones { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 1.5rem; 
+            margin: 2rem 0; 
+        }
+        .juego-btn { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: white; 
+            border: none; 
+            padding: 2rem; 
+            border-radius: 16px; 
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+        }
+        .juego-btn:hover { 
+            transform: translateY(-5px) scale(1.05); 
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
+        }
+        .juego-btn.correcto { 
+            background: linear-gradient(135deg, var(--exito) 0%, #2F855A 100%);
+            animation: correctPulse 0.6s;
+        }
+        .juego-btn.incorrecto { 
+            background: linear-gradient(135deg, var(--error) 0%, #C53030 100%);
+            animation: shake 0.5s;
+        }
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .juego-escena { 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+            padding: 3rem; 
+            border-radius: 16px; 
+            text-align: center; 
+            font-size: 4rem; 
+            margin: 2rem 0; 
+            border: 4px dashed var(--morado);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .juego-progreso { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .juego-nivel { 
+            background: linear-gradient(135deg, var(--morado) 0%, #6B46C1 100%); 
+            color: white; 
+            padding: 0.8rem 1.5rem; 
+            border-radius: 25px; 
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(159, 122, 234, 0.4);
+        }
+
+        /* Muro de comentarios */
+        .comentario-item { 
+            background: white; 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            margin-bottom: 1.5rem; 
+            border-bottom: 4px solid var(--fondo-claro);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .comentario-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        .comentario-autor { 
+            font-weight: 700; 
+            color: var(--azul-claro); 
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .input-comentario { 
+            width: 100%; 
+            padding: 15px; 
+            border: 3px solid #E2E8F0; 
+            border-radius: 12px; 
+            margin-bottom: 15px; 
+            font-family: inherit; 
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .input-comentario:focus {
+            outline: none;
+            border-color: var(--azul-claro);
+            box-shadow: 0 0 0 4px rgba(43, 108, 176, 0.1);
+        }
+
+        /* Perfil e Insignias */
+        .insignia { 
+            display: inline-block; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+            padding: 15px 25px; 
+            border-radius: 25px; 
+            margin: 8px; 
+            border: 3px solid #CBD5E0; 
+            opacity: 0.5;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .insignia.desbloqueada { 
+            border-color: var(--naranja-vibrante); 
+            background: linear-gradient(135deg, #FFFAF0 0%, #FEEBC8 100%); 
+            opacity: 1;
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(237, 137, 54, 0.4);
+            animation: unlockPulse 0.6s;
+        }
+        @keyframes unlockPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* Banner decorativo */
+        .banner-decorativo {
+            background: linear-gradient(135deg, var(--rosa) 0%, var(--morado) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(246, 135, 179, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-decorativo::before {
+            content: '⭐ 🌟 ✨';
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0.2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 1rem; }
+            nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+            nav button { margin: 4px; font-size: 0.85rem; padding: 8px 12px; }
+            .hero h1 { font-size: 2rem; }
+            .juego-opciones { grid-template-columns: 1fr; }
+            .grid-actividades { grid-template-columns: 1fr; }
+        }
+
+        /* Imágenes decorativas flotantes */
+        .floating-icons {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Iconos flotantes decorativos -->
+<div class="floating-icons" style="top: 10%; left: 5%;">📚</div>
+<div class="floating-icons" style="top: 20%; right: 8%; animation-delay: 2s;">🔍</div>
+<div class="floating-icons" style="bottom: 15%; left: 10%; animation-delay: 4s;"></div>
+<div class="floating-icons" style="bottom: 25%; right: 5%; animation-delay: 6s;">✨</div>
+
+<header>
+    <div class="logo">🔍 Academia de Detectives</div>
+    <nav>
+        <button onclick="mostrarSeccion('inicio')" class="activo" id="nav-inicio">🏠 Inicio</button>
+        <button onclick="mostrarSeccion('actividades')" id="nav-actividades">📂 Misiones</button>
+        <button onclick="mostrarSeccion('juegos')" id="nav-juegos">🎮 Juegos</button>
+        <button onclick="mostrarSeccion('hemeroteca')" id="nav-hemeroteca">📺 Videos</button>
+        <button onclick="mostrarSeccion('muro')" id="nav-muro">💬 Muro</button>
+        <button onclick="mostrarSeccion('perfil')" id="nav-perfil">🏆 Perfil</button>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- SECCIÓN INICIO -->
+    <div id="inicio" class="seccion activa">
+        <div class="hero">
+            <h1>🎯 ¡Bienvenido, Detective <span id="nombre-estudiante">Investigador</span>!</h1>
+            <p class="hero-subtitle">Tu misión: Leer entre líneas, encontrar pistas ocultas y resolver el misterio del significado.</p>
+            <div class="progress-bar"><div class="progress-fill" id="barra-progreso"></div></div>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Progreso: <span id="texto-progreso">0</span> de 10 misiones completadas</p>
+            <button class="btn-accion" onclick="mostrarSeccion('actividades')" style="font-size: 1.3rem; padding: 15px 40px;">🚀 Comenzar Primera Misión</button>
+        </div>
+
+        <div class="banner-decorativo">
+            <h2 style="margin-bottom: 1rem;">🌟 ¿Por qué ser un detective literario?</h2>
+            <p style="font-size: 1.1rem;">Porque las mejores historias no están escritas en las palabras... ¡están escondidas entre ellas!</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="card" style="background: linear-gradient(135deg, #FFE5D9 0%, #FFD7BA 100%); border-left-color: var(--naranja-vibrante);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📰</div>
+                <h3>Noticia Destacada</h3>
+                <p><strong>Descubren nueva especie marina.</strong></p>
+                <p style="font-size: 0.95rem;">¿Por qué crees que el autor usa "descubren" en lugar de "encuentran"? Ve a la Hemeroteca para debatir.</p>
+            </div>
+            <div class="card" style="background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%); border-left-color: var(--azul-turquesa);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">💡</div>
+                <h3>Consejo del Día</h3>
+                <p>Para inferir, no te preguntes "¿Qué dice el texto?", pregúntate: <strong style="color: var(--azul-profundo);">"¿Qué nos quiere decir el autor con esto?"</strong></p>
+            </div>
+            <div class="card" style="background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%); border-left-color: var(--morado);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎮</div>
+                <h3>Juegos Disponibles</h3>
+                <p><strong>3 juegos interactivos</strong> te esperan. ¡Gana puntos y desbloquea insignias mientras te diviertes!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN ACTIVIDADES -->
+    <div id="actividades" class="seccion">
+        <div class="banner-decorativo" style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-profundo) 100%);">
+            <h2 style="margin: 0;">📂 Tablero de Misiones</h2>
+            <p style="margin: 0.5rem 0 0 0;">Selecciona una misión para comenzar. ¡Completa todas para convertirte en Gran Detective!</p>
+        </div>
+        <div class="grid-actividades" id="lista-actividades"></div>
+        
+        <div id="area-juego" class="area-juego">
+            <button class="btn-accion btn-secundario" onclick="cerrarJuego()">⬅ Volver al Tablero</button>
+            <h3 id="juego-titulo" style="margin-top: 1.5rem; font-size: 1.8rem; color: var(--azul-profundo);"></h3>
+            <div id="juego-texto" class="texto-base"></div>
+            <p id="juego-pregunta" style="font-weight: 700; font-size: 1.3rem; color: var(--azul-profundo); margin: 2rem 0;"></p>
+            <div id="juego-opciones" class="opciones"></div>
+            <div id="juego-retro" class="retroalimentacion"></div>
+            <button id="juego-btn-siguiente" class="btn-accion" style="display:none;" onclick="cerrarJuego()">Continuar ➡</button>
+        </div>
+    </div>
+
+    <!-- SECCIÓN JUEGOS INTERACTIVOS -->
+    <div id="juegos" class="seccion">
+        <div class="banner-decorativo" style="background: linear-gradient(135deg, var(--morado) 0%, var(--rosa) 100%);">
+            <h2 style="margin: 0;">🎮 Zona de Juegos Inferenciales</h2>
+            <p style="margin: 0.5rem 0 0 0;">¡Pon a prueba tus habilidades de detective con estos 3 juegos interactivos!</p>
+        </div>
+
+        <!-- JUEGO 1: ADIVINA LA EMOCIÓN -->
+        <div class="juego-container" id="juego1-container">
+            <div class="juego-header">
+                <h3>🎭 Juego 1: Adivina la Emoción</h3>
+                <div class="juego-score">⭐ Puntos: <span id="juego1-puntos">0</span></div>
+            </div>
+            <div class="juego-progreso">
+                <span class="juego-nivel">📍 Nivel <span id="juego1-nivel">1</span> de 5</span>
+                <span style="font-weight: 700; color: var(--azul-profundo);">✅ Aciertos: <span id="juego1-aciertos">0</span>/5</span>
+            </div>
+            <div id="juego1-contenido">
+                <p class="juego-pregunta" id="juego1-pregunta">Cargando situación...</p>
+                <div class="juego-opciones" id="juego1-opciones"></div>
+                <div id="juego1-retro" class="retroalimentacion"></div>
+                <button class="btn-accion" id="juego1-siguiente" style="display:none;" onclick="siguienteJuego1()">Siguiente Situación ➡</button>
+            </div>
+        </div>
+
+        <!-- JUEGO 2: COMPLETA LA HISTORIA -->
+        <div class="juego-container" id="juego2-container">
+            <div class="juego-header" style="background: linear-gradient(135deg, var(--azul-turquesa) 0%, var(--azul-claro) 100%);">
+                <h3>📖 Juego 2: Completa la Historia</h3>
+                <div class="juego-score">⭐ Puntos: <span id="juego2-puntos">0</span></div>
+            </div>
+            <div class="juego-progreso">
+                <span class="juego-nivel" style="background: linear-gradient(135deg, var(--azul-turquesa) 0%, var(--azul-claro) 100%);">📍 Nivel <span id="juego2-nivel">1</span> de 5</span>
+                <span style="font-weight: 700; color: var(--azul-profundo);">✅ Aciertos: <span id="juego2-aciertos">0</span>/5</span>
+            </div>
+            <div id="juego2-contenido">
+                <div class="texto-base" id="juego2-texto" style="background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%); border-left-color: var(--azul-turquesa);">Cargando historia...</div>
+                <p class="juego-pregunta">¿Cuál es el final más lógico?</p>
+                <div class="juego-opciones" id="juego2-opciones"></div>
+                <div id="juego2-retro" class="retroalimentacion"></div>
+                <button class="btn-accion" id="juego2-siguiente" style="display:none;" onclick="siguienteJuego2()">Siguiente Historia ➡</button>
+            </div>
+        </div>
+
+        <!-- JUEGO 3: DETECTIVE DE ESCENAS -->
+        <div class="juego-container" id="juego3-container">
+            <div class="juego-header" style="background: linear-gradient(135deg, var(--naranja-vibrante) 0%, var(--rosa) 100%);">
+                <h3>🔍 Juego 3: Detective de Escenas</h3>
+                <div class="juego-score">⭐ Puntos: <span id="juego3-puntos">0</span></div>
+            </div>
+            <div class="juego-progreso">
+                <span class="juego-nivel" style="background: linear-gradient(135deg, var(--naranja-vibrante) 0%, var(--rosa) 100%);">📍 Nivel <span id="juego3-nivel">1</span> de 5</span>
+                <span style="font-weight: 700; color: var(--azul-profundo);">✅ Aciertos: <span id="juego3-aciertos">0</span>/5</span>
+            </div>
+            <div id="juego3-contenido">
+                <p style="font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">👀 Observa las pistas y deduce qué sucedió:</p>
+                <div class="juego-escena" id="juego3-escena">Cargando escena...</div>
+                <p class="juego-pregunta">¿Qué inferes que pasó?</p>
+                <div class="juego-opciones" id="juego3-opciones"></div>
+                <div id="juego3-retro" class="retroalimentacion"></div>
+                <button class="btn-accion" id="juego3-siguiente" style="display:none;" onclick="siguienteJuego3()">Siguiente Escena ➡</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN HEMEROTECA CON ENLACES A YOUTUBE -->
+    <div id="hemeroteca" class="seccion">
+        <div class="banner-decorativo" style="background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);">
+            <h2 style="margin: 0;">📺 Hemeroteca de Videos Educativos</h2>
+            <p style="margin: 0.5rem 0 0 0;">Haz clic en los videos para verlos en YouTube. ¡Luego regresa para responder las preguntas!</p>
+        </div>
+        
+        <!-- VIDEO 1 -->
+        <div class="recurso-externo" style="border-left-color: #FF0000;">
+            <h3 style="color: #FF0000; margin-bottom: 1rem;">📹 Video 1: Comprensión Lectora e Inferencias</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;"><strong>Instrucción:</strong> Haz clic en el botón de abajo para ver el video en YouTube. Presta atención a los ejemplos de inferencias.</p>
+            
+            <a href="https://www.youtube.com/watch?v=x32E3PyJ4T8" target="_blank" class="video-link-card">
+                <div class="youtube-icon">▶️</div>
+                <h4>Ver Video en YouTube</h4>
+                <p>Comprensión Lectora - Inferencias</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">🔗 Se abrirá en una nueva pestaña</p>
+            </a>
+
+            <div style="background: #FFF5F5; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border-left: 4px solid #FF0000;">
+                <p style="font-weight: 700; margin-bottom: 1rem; color: var(--azul-profundo);">📝 Pregunta de análisis:</p>
+                <p style="margin-bottom: 1rem;">¿Qué mensaje implícito puedes extraer de este video? ¿Qué pistas te llevaron a esa conclusión?</p>
+                <button class="btn-accion" onclick="alert('💡 Recuerda: Para inferir, busca las pistas que el autor da y conecta con tu conocimiento del mundo.')">💭 Reflexionar</button>
+            </div>
+        </div>
+
+        <!-- VIDEO 2 -->
+        <div class="recurso-externo" style="border-left-color: #8B0000;">
+            <h3 style="color: #8B0000; margin-bottom: 1rem;">📹 Video 2: Pensamiento Crítico</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;"><strong>Instrucción:</strong> Este video complementa las habilidades de análisis. Observa los detalles y cuestiona la información.</p>
+            
+            <a href="https://www.youtube.com/watch?v=b03epT4GA8U" target="_blank" class="video-link-card" style="background: linear-gradient(135deg, #8B0000 0%, #CC0000 100%);">
+                <div class="youtube-icon">▶️</div>
+                <h4>Ver Video en YouTube</h4>
+                <p>Pensamiento Crítico y Análisis</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">🔗 Se abrirá en una nueva pestaña</p>
+            </a>
+
+            <div style="background: #FFF5F5; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border-left: 4px solid #8B0000;">
+                <p style="font-weight: 700; margin-bottom: 1rem; color: var(--azul-profundo);">📝 Pregunta inferencial:</p>
+                <p style="margin-bottom: 1rem;">¿Qué información no se dice explícitamente pero se puede deducir del contexto del video?</p>
+                <button class="btn-accion" onclick="alert('🔍 Excelente pregunta. Busca las omisiones deliberadas y las implicaciones de lo que se muestra.')"> Analizar</button>
+            </div>
+        </div>
+
+        <!-- VIDEO 3 RECOMENDADO -->
+        <div class="recurso-externo" style="border-left-color: var(--exito); background: linear-gradient(135deg, #F0FFF4 0%, white 100%);">
+            <h3 style="color: var(--exito); margin-bottom: 1rem;">🎥 Video Recomendado: El Poder de la Lectura</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;"><em>De la serie educativa "Happy Learning" - Canal verificado</em></p>
+            
+            <a href="https://www.youtube.com/watch?v=5xMjbqKqQ8E" target="_blank" class="video-link-card" style="background: linear-gradient(135deg, var(--exito) 0%, #2F855A 100%);">
+                <div class="youtube-icon">▶️</div>
+                <h4>Ver Video en YouTube</h4>
+                <p>El Poder de la Lectura - Happy Learning</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">🔗 Se abrirá en una nueva pestaña</p>
+            </a>
+
+            <div style="background: #F0FFF4; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border-left: 4px solid var(--exito);">
+                <p style="font-weight: 700; margin-bottom: 1rem; color: var(--azul-profundo);">📝 Pregunta:</p>
+                <p style="margin-bottom: 1rem;">Después de ver el video, ¿puedes dar un ejemplo de una inferencia que hayas hecho hoy en tu vida diaria?</p>
+                <button class="btn-accion" onclick="alert('💭 Las inferencias están en todas partes: cuando ves nubes grises y deduces que lloverá, o cuando ves a alguien bostezar y piensas que tiene sueño.')">✨ Compartir ejemplo</button>
+            </div>
+        </div>
+
+        <!-- VIDEO 4: MEDIO AMBIENTE -->
+        <div class="recurso-externo" style="border-left-color: #0066CC;">
+            <h3 style="color: #0066CC; margin-bottom: 1rem;">🌍 Video: La Contaminación del Plástico</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;"><em>Relacionado con la Actividad 9 - Infografía Completa</em></p>
+            
+            <a href="https://www.youtube.com/watch?v=6g_6J23YqQ4" target="_blank" class="video-link-card" style="background: linear-gradient(135deg, #0066CC 0%, #004499 100%);">
+                <div class="youtube-icon">▶️</div>
+                <h4>Ver Video en YouTube</h4>
+                <p>Contaminación por Plástico en los Océanos</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">🔗 Se abrirá en una nueva pestaña</p>
+            </a>
+
+            <div style="background: #EBF8FF; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border-left: 4px solid #0066CC;">
+                <p style="font-weight: 700; margin-bottom: 1rem; color: var(--azul-profundo);">📝 Pregunta inferencial:</p>
+                <p style="margin-bottom: 1rem;">El video muestra el ciclo del plástico. ¿Qué mensaje implícito hay sobre nuestras decisiones diarias?</p>
+                <button class="btn-accion" onclick="alert('🌊 Inferencia clave: Lo que tiramos \"afuera\" nunca se va realmente. Nuestras acciones de hoy afectan nuestro futuro.')">🌱 Ver pista</button>
+            </div>
+        </div>
+
+        <!-- JUEGO EXTERNO -->
+        <div class="recurso-externo" style="border-left-color: var(--morado);">
+            <h3 style="color: var(--morado); margin-bottom: 1rem;">🎮 Juego Externo: Caza de Falacias</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Practica la identificación de argumentos ocultos en este recurso externo.</p>
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2.5rem; text-align: center; border-radius: 16px; color: white; margin-bottom: 1.5rem; box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🎯 🔍 </div>
+                <p style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem;">¿Listo para el desafío?</p>
+                <button class="btn-accion" style="background: white; color: #667eea; font-size: 1.2rem; padding: 15px 40px;" onclick="window.open('https://wordwall.net/es', '_blank')">🚀 Jugar Ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MURO -->
+    <div id="muro" class="seccion">
+        <div class="banner-decorativo" style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-turquesa) 100%);">
+            <h2 style="margin: 0;">💬 Muro de los Detectives</h2>
+            <p style="margin: 0.5rem 0 0 0;">Comparte tus inferencias. ¡Un buen detective respeta las pistas de los demás!</p>
+        </div>
+        <div style="background: white; padding: 2.5rem; border-radius: 16px; margin-bottom: 2.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
+            <div style="margin-bottom: 1rem;">
+                <input type="text" id="input-nombre" class="input-comentario" placeholder="👤 Tu nombre de detective (ej. Detective Sombra)" style="width: 48%; display: inline-block;">
+                <input type="text" id="input-comentario" class="input-comentario" placeholder="✍️ Escribe tu inferencia o respuesta aquí..." style="width: 48%; display: inline-block; margin-left: 2%;">
+            </div>
+            <button class="btn-accion" onclick="agregarComentario()" style="width: 100%; font-size: 1.1rem;">📤 Publicar Comentario</button>
+        </div>
+        <div id="lista-comentarios">
+            <div class="comentario-item" style="background: linear-gradient(135deg, #F0FFF4 0%, white 100%); border-left: 6px solid var(--exito);">
+                <div class="comentario-autor">👨‍🏫 Detective Lupa (Docente)</div>
+                <div style="font-size: 1.05rem; line-height: 1.7;">¡Bienvenidos al muro! Recuerden que para inferir, siempre debemos aportar una pista del texto que respalde nuestra idea. ¡Espero sus análisis!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN PERFIL -->
+    <div id="perfil" class="seccion">
+        <div class="banner-decorativo" style="background: linear-gradient(135deg, var(--amarillo) 0%, var(--naranja-vibrante) 100%);">
+            <h2 style="margin: 0;">🏆 Mi Perfil de Investigador</h2>
+            <p style="margin: 0.5rem 0 0 0;">¡Mira tu progreso y las insignias que has desbloqueado!</p>
+        </div>
+        <div class="card" style="background: linear-gradient(135deg, white 0%, #F7FAFC 100%);">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="font-size: 5rem; margin-bottom: 1rem;">🌟</div>
+                <h3 style="font-size: 1.5rem; color: var(--azul-profundo); margin-bottom: 0.5rem;">Puntos de Deducción Totales</h3>
+                <div style="font-size: 3.5rem; font-weight: 800; color: var(--naranja-vibrante); text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+                    <span id="puntos-total">0</span>
+                </div>
+                <p style="color: #718096; margin-top: 0.5rem;">¡Sigue acumulando puntos!</p>
+            </div>
+            
+            <h3 style="text-align: center; margin-bottom: 2rem; color: var(--azul-profundo); font-size: 1.5rem;">🏅 Insignias Desbloqueadas</h3>
+            <div id="contenedor-insignias" style="text-align: center;">
+                <div class="insignia" id="insignia-1">🥇 Detective Novato<br><small>(1 misión)</small></div>
+                <div class="insignia" id="insignia-3">🔍 Rastreador de Pistas<br><small>(3 misiones)</small></div>
+                <div class="insignia" id="insignia-5">🧠 Maestro del Subtexto<br><small>(5 misiones)</small></div>
+                <div class="insignia" id="insignia-10">👑 Gran Detective<br><small>(10 misiones)</small></div>
+                <div class="insignia" id="insignia-juegos">🎮 Jugador Experto<br><small>(3 juegos)</small></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- BASE DE DATOS DE LAS 10 ACTIVIDADES ---
+    const actividades = [
+        { id: 1, titulo: "1. El Detective de Pistas", texto: "María cerró la ventana con fuerza, apretó los puños y miró el reloj por tercera vez en un minuto. El teléfono no sonaba.", pregunta: "Basándote en las acciones de María, ¿qué emoción está experimentando principalmente?", opciones: [{ texto: "A) Tristeza profunda", correcta: false, retro: "Incorrecto. Apretar los puños y mirar el reloj denotan tensión, no abatimiento." }, { texto: "B) Ansiedad e impaciencia", correcta: true, retro: "¡Excelente deducción! 'Apretar los puños' y 'mirar el reloj' son pistas corporales de tensión y espera." }, { texto: "C) Alegría contenida", correcta: false, retro: "Incorrecto. No hay pistas de sonrisa o relajación que sugieran alegría." }] },
+        { id: 2, titulo: "2. El Final Inconcluso", texto: "Lucas guardó la carta sin abrir en el cajón. Llevaba tres días allí. Cada mañana la miraba, pero algo le impedía romperla. Esa noche, escuchó el camión de la basura y, sin pensarlo, tomó la carta y bajó corriendo.", pregunta: "¿Por qué Lucas bajó corriendo con la carta al escuchar el camión?", opciones: [{ texto: "A) Para leerla antes de que fuera tarde", correcta: false, retro: "Si quisiera leerla, no la llevaría al camión de basura." }, { texto: "B) Para deshacerse de ella antes de perder el valor", correcta: true, retro: "¡Exacto! El sonido fue el detonante para actuar por impulso y vencer su miedo de 3 días." }, { texto: "C) Porque la carta era basura", correcta: false, retro: "Demasiado literal. La inferencia clave está en su cambio de actitud tras 3 días de duda." }] },
+        { id: 3, titulo: "3. Titular con Trampa", texto: "TITULAR: 'Gobierno anuncia reducción del 15% en impuestos'. CUERPO: El Ministerio confirmó que los impuestos a las grandes empresas se reducirán. Los servicios públicos de salud no recibirán financiación adicional.", pregunta: "¿Por qué el titular no especifica que la reducción es solo para 'grandes empresas'?", opciones: [{ texto: "A) Porque el periodista lo olvidó", correcta: false, retro: "Poco probable. Los titulares son cuidadosamente redactados." }, { texto: "B) Para que todos los ciudadanos sientan que es una buena noticia", correcta: true, retro: "¡Excelente! Es una estrategia comunicativa para maximizar el apoyo popular, ocultando que el beneficio es limitado." }, { texto: "C) Porque no es importante especificarlo", correcta: false, retro: "Es muy importante, ya que cambia completamente quién se beneficia." }] },
+        { id: 4, titulo: "4. Traductor de Subtextos", texto: "Carlos llega 30 min. tarde a una reunión. CARLOS: 'Uf, el tráfico estaba imposible'. ANA: 'Claro, claro. El tráfico... siempre es el mismo tráfico, ¿verdad?'", pregunta: "¿Qué realmente quiere decir Ana con su respuesta?", opciones: [{ texto: "A) Que entiende perfectamente el tráfico", correcta: false, retro: "La repetición sarcástica indica lo contrario." }, { texto: "B) Que no cree la excusa y piensa que es un problema recurrente", correcta: true, retro: "¡Perfecto! El 'Claro, claro' y la repetición son marcadores clásicos de sarcasmo e incredulidad." }, { texto: "C) Que quiere que le explique el tráfico", correcta: false, retro: "La pregunta '¿verdad?' es retórica, no busca información real." }] },
+        { id: 5, titulo: "5. Caza del Tesoro Literaria", texto: "Estás en un bosque. Dos caminos: uno iluminado por luciérnagas, otro en sombras. Un letrero dice: 'Lo brillante no siempre es seguro'. Eliges el brillante y caes en un pantano.", pregunta: "¿Qué enseñanza sobre la toma de decisiones se extrae de esta aventura?", opciones: [{ texto: "A) Que siempre hay que elegir lo más bonito", correcta: false, retro: "El letrero advertía exactamente lo contrario." }, { texto: "B) Que las decisiones apresuradas basadas en apariencias pueden tener consecuencias negativas", correcta: true, retro: "¡Brillante! La historia enseña a leer las advertencias y no dejarse llevar solo por lo que 'brilla'." }, { texto: "C) Que los bosques son peligrosos", correcta: false, retro: "Demasiado literal. La historia es una metáfora sobre decisiones." }] },
+        { id: 6, titulo: "6. Meme Literario", texto: "Pedro estudió toda la noche para el examen. Llegó temprano y sacó su calculadora. El profesor entró y dijo: 'Guarden todo. Hoy no hay examen, haremos un proyecto de dibujo'.", pregunta: "¿Qué meme representa mejor la ironía y el sentimiento de Pedro?", opciones: [{ texto: "A) El perro en la casa en llamas ('This is fine')", correcta: false, retro: "Ese meme es para cuando hay un desastre y se finge normalidad. Pedro está en shock, no fingiendo." }, { texto: "B) El payaso poniéndose el maquillaje", correcta: true, retro: "¡Exacto! Se usa cuando alguien hace un esfuerzo enorme para prepararse para algo que resulta ser inútil o cambia totalmente." }, { texto: "C) El gato frotándose las manos ('Plan perfecto')", correcta: false, retro: "Pedro no tramaba nada, solo quería pasar el examen." }] },
+        { id: 7, titulo: "7. Mapa de Relaciones Ocultas", texto: "TEXTO 1: Los árboles dejan caer sus hojas en otoño para ahorrar energía y sobrevivir al invierno. TEXTO 2: La empresa TechSol cerró su división de videojuegos para evitar la quiebra y salvar el negocio principal.", pregunta: "¿Cuál es el 'tema central oculto' o enseñanza compartida por ambos textos?", opciones: [{ texto: "A) La naturaleza es más sabia que los humanos", correcta: false, retro: "El texto 2 no habla de naturaleza, no puedes inferir esa comparación." }, { texto: "B) A veces es necesario sacrificar una parte para salvar el todo", correcta: true, retro: "¡Brillante inferencia! El árbol sacrifica hojas; la empresa sacrifica una división. Ambos salvan el núcleo." }, { texto: "C) El invierno y las crisis son peligrosos", correcta: false, retro: "Demasiado literal. La inferencia clave está en cómo reaccionan ante el peligro (soltar/cerrar)." }] },
+        { id: 8, titulo: "8. El Interrogatorio", texto: "Pedro llegó 15 minutos antes que todos al entrenamiento. El entrenador no dijo nada, sonrió, le entregó el silbato y le dijo: 'Hoy tú diriges el calentamiento, yo te observaré'.", pregunta: "¿Cuál es la razón implícita por la que el entrenador le dio el silbato a Pedro?", opciones: [{ texto: "A) Porque quería castigarlo por llegar temprano", correcta: false, retro: "Una sonrisa y dar liderazgo no son formas de castigo." }, { texto: "B) Porque reconoció su responsabilidad y liderazgo como ejemplo para el equipo", correcta: true, retro: "¡Interrogatorio resuelto! La puntualidad extrema demuestra respeto, y el entrenador le otorga confianza sin necesidad de palabras." }, { texto: "C) Porque el entrenador estaba cansado y necesitaba ayuda", correcta: false, retro: "Aunque podría ser cierto, la inferencia pedagógica más fuerte basada en la 'sonrisa' es el reconocimiento al mérito." }] },
+        { id: 9, titulo: "9. Infografía Completa", texto: "VIDEO: Una botella de plástico va al mar, se rompe en pedacitos invisibles. Un pez se come un pedazo. Luego, un humano se come al pez.", pregunta: "¿Cuál es el mensaje subyacente que completa la infografía de este video?", opciones: [{ texto: "A) Los peces deben dejar de comer plástico", correcta: false, retro: "Es una conclusión ingenua. El video apunta a un ciclo sistémico, no a la culpa del pez." }, { texto: "B) Lo que le hacemos al planeta, a la larga, nos afecta a nosotros mismos (cadena alimenticia)", correcta: true, retro: "¡Excelente! El video muestra visualmente cómo la contaminación regresa al punto de origen: el ser humano." }, { texto: "C) El plástico es un material muy resistente", correcta: false, retro: "Es un dato literal, pero no es el 'mensaje subyacente' o la moraleja del video." }] },
+        { id: 10, titulo: "10. Duelo de Argumentos", texto: "'Prohibieron los celulares en el salón para mejorar la atención. Pero ahora los recreos son un caos, nadie habla, y los profesores vigilan el doble porque los chicos se esconden en los baños a usarlos.'", pregunta: "¿Cuál es el argumento implícito más fuerte del autor en contra de la prohibición?", opciones: [{ texto: "A) Los celulares son muy caros y se pueden perder en los baños", correcta: false, retro: "El texto no menciona el costo ni el miedo a perderlos." }, { texto: "B) Prohibir algo por la fuerza no elimina el interés, sino que genera peores problemas de convivencia y ocultamiento", correcta: true, retro: "¡Victoria en el duelo! El autor muestra que la medida es contraproducente: esconde el problema y destruye la socialización." }, { texto: "C) Los profesores no saben controlar a los estudiantes", correcta: false, retro: "El texto dice que vigilan 'el doble', mostrando esfuerzo, no ineficiencia. El foco es el efecto de la prohibición." }] }
+    ];
+
+    // --- DATOS DE LOS 3 JUEGOS ---
+    const juego1Data = [
+        { situacion: "Ana recibió una carta, la leyó dos veces, la dobló cuidadosamente y la guardó en una caja de recuerdos junto a una foto.", opciones: [{ texto: "Nostalgia y aprecio", correcta: true }, { texto: "Enojo y frustración", correcta: false }, { texto: "Indiferencia total", correcta: false }], retroCorrecta: "¡Correcto! Guardar algo 'cuidadosamente' en una 'caja de recuerdos' muestra valor emocional.", retroIncorrecta: "Las acciones de Ana (leer dos veces, guardar cuidadosamente) muestran apego emocional, no enojo ni indiferencia." },
+        { situacion: "Pedro vio que su equipo perdió el partido. Bajó la cabeza, pateó una piedra y se fue sin saludar a nadie.", opciones: [{ texto: "Alegría contenida", correcta: false }, { texto: "Decepción y tristeza", correcta: true }, { texto: "Sorpresa e incredulidad", correcta: false }], retroCorrecta: "¡Exacto! 'Bajar la cabeza' y 'irse sin saludar' son pistas clásicas de decepción.", retroIncorrecta: "Las acciones físicas de Pedro (bajar la cabeza, irse sin saludar) indican emociones negativas, no alegría." },
+        { situacion: "María vio el regalo, sus ojos se iluminaron, dio un saltito y abrazó fuerte a quien se lo dio.", opciones: [{ texto: "Emoción y gratitud", correcta: true }, { texto: "Miedo y nerviosismo", correcta: false }, { texto: "Confusión y duda", correcta: false }], retroCorrecta: "¡Perfecto! Los 'ojos iluminados', el 'saltito' y el 'abrazo fuerte' son indicadores claros de emoción positiva.", retroIncorrecta: "Las reacciones de María (ojos iluminados, saltito, abrazo) son señales universales de alegría y agradecimiento." },
+        { situacion: "Carlos miró su reloj, miró la puerta, suspiró y empezó a caminar de un lado a otro.", opciones: [{ texto: "Relajación y calma", correcta: false }, { texto: "Impaciencia y ansiedad", correcta: true }, { texto: "Aburrimiento y desgano", correcta: false }], retroCorrecta: "¡Excelente! Mirar el reloj repetidamente y caminar de un lado a otro son signos de impaciencia.", retroIncorrecta: "Las acciones de Carlos (mirar reloj, suspirar, caminar) son comportamientos típicos de alguien que espera con ansiedad." },
+        { situacion: "Lucas terminó su examen, revisó cada respuesta tres veces y entregó la hoja con una sonrisa.", opciones: [{ texto: "Inseguridad y miedo", correcta: false }, { texto: "Confianza y satisfacción", correcta: true }, { texto: "Indiferencia y apatía", correcta: false }], retroCorrecta: "¡Correcto! Revisar 'tres veces' muestra dedicación, y la 'sonrisa' al entregar indica satisfacción.", retroIncorrecta: "La combinación de revisar cuidadosamente y sonreír al entregar muestra una actitud positiva y segura." }
+    ];
+
+    const juego2Data = [
+        { inicio: "El cielo se oscureció rápidamente. El viento empezó a soplar fuerte, moviendo las ramas de los árboles. Las personas en la calle comenzaron a caminar más rápido.", final: "Todos buscaron refugio porque se acercaba una tormenta.", correcta: true, otras: ["Salieron a hacer picnic al parque", "Se quedaron tranquilos tomando el sol"] },
+        { inicio: "María entró a la cocina y vio el pastel destruido en el suelo. Las migas llegaban hasta la puerta donde estaba el perro con cara culpable.", final: "María suspiró y empezó a limpiar, sabiendo que el perro lo había hecho.", correcta: true, otras: ["María celebró porque el pastel estaba listo", "María llamó al pastelero para pedir otro"] },
+        { inicio: "El estudiante estudió toda la noche, repasó cada tema y llegó temprano al examen. Cuando recibió su calificación, sonrió ampliamente.", final: "Había aprobado con la mejor nota del salón.", correcta: true, otras: ["Había reprobado el examen", "Decidió no volver a estudiar"] },
+        { inicio: "La planta llevaba semanas sin agua. Sus hojas estaban marrones y caídas. El tallo se veía seco y quebradizo.", final: "La planta se había secado completamente y murió.", correcta: true, otras: ["La planta floreció hermosamente", "La planta creció el doble de tamaño"] },
+        { inicio: "El equipo entrenó todos los días durante meses. Llegó el día del campeonato y jugaron con toda su energía.", final: "Ganaron el torneo gracias a su dedicación y trabajo en equipo.", correcta: true, otras: ["Perdieron porque no les importaba ganar", "Abandonaron el torneo a la mitad"] }
+    ];
+
+    const juego3Data = [
+        { escena: "🏠💧🚿🛁🧼", pregunta: "¿Qué está sucediendo?", opciones: [{ texto: "Alguien está cocinando", correcta: false }, { texto: "Alguien se está bañando", correcta: true }, { texto: "Alguien está lavando el carro", correcta: false }], retro: "Las pistas (casa, agua, ducha, bañera, jabón) indican claramente una persona bañándose." },
+        { escena: "📚✏️🎓💡", pregunta: "¿Qué actividad se está realizando?", opciones: [{ texto: "Estudiando o aprendiendo", correcta: true }, { texto: "Jugando videojuegos", correcta: false }, { texto: "Cocinando una receta", correcta: false }], retro: "Los libros, lápiz, graduación y bombilla (idea) representan el proceso de aprendizaje." },
+        { escena: "🌧️☔🚗💨🏠", pregunta: "¿Qué situación se describe?", opciones: [{ texto: "Un día soleado de playa", correcta: false }, { texto: "Llegando a casa bajo la lluvia", correcta: true }, { texto: "Lavando el auto en el garaje", correcta: false }], retro: "La lluvia, paraguas, carro con movimiento y casa indican a alguien llegando a casa en un día lluvioso." },
+        { escena: "🎂🎉🎁🎈‍👩‍👧", pregunta: "¿Qué evento está ocurriendo?", opciones: [{ texto: "Un funeral triste", correcta: false }, { texto: "Una fiesta de cumpleaños", correcta: true }, { texto: "Una reunión de trabajo", correcta: false }], retro: "El pastel, fiesta, regalos, globos y familia son elementos clásicos de una celebración de cumpleaños." },
+        { escena: "⚽‍️🥅🏆", pregunta: "¿Qué está pasando?", opciones: [{ texto: "Un concierto de música", correcta: false }, { texto: "Un partido de fútbol con victoria", correcta: true }, { texto: "Una competencia de natación", correcta: false }], retro: "El balón, correr, portería, aplausos y trofeo indican un partido de fútbol donde alguien ganó." }
+    ];
+
+    // --- ESTADO DE LA APLICACIÓN ---
+    let progreso = 0;
+    let actividadesCompletadas = new Set();
+    let juego1Nivel = 0, juego1Puntos = 0, juego1Aciertos = 0;
+    let juego2Nivel = 0, juego2Puntos = 0, juego2Aciertos = 0;
+    let juego3Nivel = 0, juego3Puntos = 0, juego3Aciertos = 0;
+
+    // --- FUNCIONES DE NAVEGACIÓN ---
+    function mostrarSeccion(id) {
+        document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
+        document.getElementById(id).classList.add('activa');
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('activo'));
+        document.getElementById('nav-' + id).classList.add('activo');
+        if(id === 'actividades') renderizarListaActividades();
+        if(id === 'perfil') actualizarPerfil();
+        if(id === 'juegos') { cargarJuego1(); cargarJuego2(); cargarJuego3(); }
+    }
+
+    // --- FUNCIONES DE ACTIVIDADES ---
+    function renderizarListaActividades() {
+        const contenedor = document.getElementById('lista-actividades');
+        contenedor.innerHTML = '';
+        actividades.forEach((act, index) => {
+            const estaCompletada = actividadesCompletadas.has(act.id);
+            const div = document.createElement('div');
+            div.className = `card ${estaCompletada ? 'completada' : ''}`;
+            div.innerHTML = `<h3>${act.titulo}</h3><p>${estaCompletada ? '✅ Misión Cumplida' : '🔒 Toca para iniciar'}</p>`;
+            div.onclick = () => cargarJuego(index);
+            contenedor.appendChild(div);
+        });
+    }
+
+    function cargarJuego(index) {
+        const act = actividades[index];
+        document.getElementById('lista-actividades').style.display = 'none';
+        document.querySelector('#actividades .banner-decorativo').style.display = 'none';
+        
+        const areaJuego = document.getElementById('area-juego');
+        areaJuego.style.display = 'block';
+        
+        document.getElementById('juego-titulo').innerText = act.titulo;
+        document.getElementById('juego-texto').innerText = act.texto;
+        document.getElementById('juego-pregunta').innerText = act.pregunta;
+        
+        const contenedorOpciones = document.getElementById('juego-opciones');
+        contenedorOpciones.innerHTML = '';
+        document.getElementById('juego-retro').style.display = 'none';
+        document.getElementById('juego-btn-siguiente').style.display = 'none';
+
+        act.opciones.forEach((op, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-opcion';
+            btn.innerText = op.texto;
+            btn.onclick = () => verificarRespuesta(index, i, btn);
+            contenedorOpciones.appendChild(btn);
+        });
+    }
+
+    function verificarRespuesta(actIndex, opIndex, btnElement) {
+        const act = actividades[actIndex];
+        const op = act.opciones[opIndex];
+        const retroDiv = document.getElementById('juego-retro');
+        
+        document.querySelectorAll('.btn-opcion').forEach(b => b.disabled = true);
+
+        if (op.correcta) {
+            btnElement.classList.add('correcta');
+            retroDiv.className = 'retroalimentacion exito';
+            retroDiv.innerHTML = '✅ ' + op.retro;
+            if (!actividadesCompletadas.has(act.id)) {
+                actividadesCompletadas.add(act.id);
+                progreso++;
+                actualizarBarraProgreso();
+            }
+        } else {
+            btnElement.classList.add('incorrecta');
+            retroDiv.className = 'retroalimentacion fallo';
+            retroDiv.innerHTML = '❌ ' + op.retro + ' <br><small style="font-weight: normal;">Inténtalo de nuevo (la misión se reiniciará en 3 segundos)</small>';
+            setTimeout(() => { cargarJuego(actIndex); }, 3000);
+            return;
+        }
+        retroDiv.style.display = 'block';
+        document.getElementById('juego-btn-siguiente').style.display = 'inline-block';
+    }
+
+    function cerrarJuego() {
+        document.getElementById('area-juego').style.display = 'none';
+        document.getElementById('lista-actividades').style.display = 'grid';
+        document.querySelector('#actividades .banner-decorativo').style.display = 'block';
+        renderizarListaActividades();
+    }
+
+    function actualizarBarraProgreso() {
+        const porcentaje = (progreso / 10) * 100;
+        document.getElementById('barra-progreso').style.width = porcentaje + '%';
+        document.getElementById('texto-progreso').innerText = progreso;
+    }
+
+    function actualizarPerfil() {
+        document.getElementById('puntos-total').innerText = (progreso * 100) + juego1Puntos + juego2Puntos + juego3Puntos;
+        if (progreso >= 1) document.getElementById('insignia-1').classList.add('desbloqueada');
+        if (progreso >= 3) document.getElementById('insignia-3').classList.add('desbloqueada');
+        if (progreso >= 5) document.getElementById('insignia-5').classList.add('desbloqueada');
+        if (progreso >= 10) document.getElementById('insignia-10').classList.add('desbloqueada');
+        if (juego1Aciertos >= 5 || juego2Aciertos >= 5 || juego3Aciertos >= 5) document.getElementById('insignia-juegos').classList.add('desbloqueada');
+    }
+
+    // --- FUNCIONES DE LOS 3 JUEGOS ---
+    function cargarJuego1() {
+        if (juego1Nivel >= juego1Data.length) {
+            document.getElementById('juego1-contenido').innerHTML = '<div style="text-align: center; padding: 3rem;"><div style="font-size: 5rem; margin-bottom: 1rem;">🎉</div><h3 style="color: var(--exito); font-size: 2rem;">¡Completaste el Juego 1!</h3><p style="font-size: 1.3rem; margin-top: 1rem;">Puntos totales: <strong style="color: var(--naranja-vibrante); font-size: 1.5rem;">' + juego1Puntos + '</strong></p><button class="btn-accion" onclick="location.reload()" style="margin-top: 2rem;">🔄 Reiniciar Juego</button></div>';
+            return;
+        }
+        const data = juego1Data[juego1Nivel];
+        document.getElementById('juego1-nivel').innerText = juego1Nivel + 1;
+        document.getElementById('juego1-pregunta').innerText = data.situacion;
+        document.getElementById('juego1-retro').style.display = 'none';
+        document.getElementById('juego1-siguiente').style.display = 'none';
+        
+        const contenedor = document.getElementById('juego1-opciones');
+        contenedor.innerHTML = '';
+        data.opciones.forEach((op, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'juego-btn';
+            btn.innerText = op.texto;
+            btn.onclick = () => verificarJuego1(i, btn);
+            contenedor.appendChild(btn);
+        });
+    }
+
+    function verificarJuego1(opIndex, btnElement) {
+        const data = juego1Data[juego1Nivel];
+        const op = data.opciones[opIndex];
+        const retroDiv = document.getElementById('juego1-retro');
+        
+        document.querySelectorAll('#juego1-opciones .juego-btn').forEach(b => b.disabled = true);
+
+        if (op.correcta) {
+            btnElement.classList.add('correcto');
+            retroDiv.className = 'retroalimentacion exito';
+            retroDiv.innerHTML = '✅ ' + data.retroCorrecta;
+            juego1Puntos += 20;
+            juego1Aciertos++;
+            document.getElementById('juego1-puntos').innerText = juego1Puntos;
+            document.getElementById('juego1-aciertos').innerText = juego1Aciertos;
+        } else {
+            btnElement.classList.add('incorrecto');
+            retroDiv.className = 'retroalimentacion fallo';
+            retroDiv.innerHTML = '❌ ' + data.retroIncorrecta;
+        }
+        retroDiv.style.display = 'block';
+        document.getElementById('juego1-siguiente').style.display = 'inline-block';
+    }
+
+    function siguienteJuego1() {
+        juego1Nivel++;
+        cargarJuego1();
+    }
+
+    function cargarJuego2() {
+        if (juego2Nivel >= juego2Data.length) {
+            document.getElementById('juego2-contenido').innerHTML = '<div style="text-align: center; padding: 3rem;"><div style="font-size: 5rem; margin-bottom: 1rem;">🎉</div><h3 style="color: var(--exito); font-size: 2rem;">¡Completaste el Juego 2!</h3><p style="font-size: 1.3rem; margin-top: 1rem;">Puntos totales: <strong style="color: var(--naranja-vibrante); font-size: 1.5rem;">' + juego2Puntos + '</strong></p><button class="btn-accion" onclick="location.reload()" style="margin-top: 2rem;">🔄 Reiniciar Juego</button></div>';
+            return;
+        }
+        const data = juego2Data[juego2Nivel];
+        document.getElementById('juego2-nivel').innerText = juego2Nivel + 1;
+        document.getElementById('juego2-texto').innerText = data.inicio;
+        document.getElementById('juego2-retro').style.display = 'none';
+        document.getElementById('juego2-siguiente').style.display = 'none';
+        
+        const contenedor = document.getElementById('juego2-opciones');
+        contenedor.innerHTML = '';
+        
+        const opciones = [data.final, ...data.otras];
+        opciones.sort(() => Math.random() - 0.5);
+        
+        opciones.forEach((texto, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'juego-btn';
+            btn.innerText = texto;
+            btn.onclick = () => verificarJuego2(texto === data.final, btn);
+            contenedor.appendChild(btn);
+        });
+    }
+
+    function verificarJuego2(esCorrecta, btnElement) {
+        const retroDiv = document.getElementById('juego2-retro');
+        document.querySelectorAll('#juego2-opciones .juego-btn').forEach(b => b.disabled = true);
+
+        if (esCorrecta) {
+            btnElement.classList.add('correcto');
+            retroDiv.className = 'retroalimentacion exito';
+            retroDiv.innerHTML = '✅ ¡Excelente inferencia! El final es coherente con las pistas del inicio.';
+            juego2Puntos += 20;
+            juego2Aciertos++;
+            document.getElementById('juego2-puntos').innerText = juego2Puntos;
+            document.getElementById('juego2-aciertos').innerText = juego2Aciertos;
+        } else {
+            btnElement.classList.add('incorrecto');
+            retroDiv.className = 'retroalimentacion fallo';
+            retroDiv.innerHTML = '❌ Ese final no es coherente con las pistas del inicio. Relee el texto y busca la lógica.';
+        }
+        retroDiv.style.display = 'block';
+        document.getElementById('juego2-siguiente').style.display = 'inline-block';
+    }
+
+    function siguienteJuego2() {
+        juego2Nivel++;
+        cargarJuego2();
+    }
+
+    function cargarJuego3() {
+        if (juego3Nivel >= juego3Data.length) {
+            document.getElementById('juego3-contenido').innerHTML = '<div style="text-align: center; padding: 3rem;"><div style="font-size: 5rem; margin-bottom: 1rem;">🎉</div><h3 style="color: var(--exito); font-size: 2rem;">¡Completaste el Juego 3!</h3><p style="font-size: 1.3rem; margin-top: 1rem;">Puntos totales: <strong style="color: var(--naranja-vibrante); font-size: 1.5rem;">' + juego3Puntos + '</strong></p><button class="btn-accion" onclick="location.reload()" style="margin-top: 2rem;">🔄 Reiniciar Juego</button></div>';
+            return;
+        }
+        const data = juego3Data[juego3Nivel];
+        document.getElementById('juego3-nivel').innerText = juego3Nivel + 1;
+        document.getElementById('juego3-escena').innerText = data.escena;
+        document.getElementById('juego3-retro').style.display = 'none';
+        document.getElementById('juego3-siguiente').style.display = 'none';
+        
+        const contenedor = document.getElementById('juego3-opciones');
+        contenedor.innerHTML = '';
+        data.opciones.forEach((op, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'juego-btn';
+            btn.innerText = op.texto;
+            btn.onclick = () => verificarJuego3(i, btn);
+            contenedor.appendChild(btn);
+        });
+    }
+
+    function verificarJuego3(opIndex, btnElement) {
+        const data = juego3Data[juego3Nivel];
+        const op = data.opciones[opIndex];
+        const retroDiv = document.getElementById('juego3-retro');
+        
+        document.querySelectorAll('#juego3-opciones .juego-btn').forEach(b => b.disabled = true);
+
+        if (op.correcta) {
+            btnElement.classList.add('correcto');
+            retroDiv.className = 'retroalimentacion exito';
+            retroDiv.innerHTML = '✅ ' + data.retro;
+            juego3Puntos += 20;
+            juego3Aciertos++;
+            document.getElementById('juego3-puntos').innerText = juego3Puntos;
+            document.getElementById('juego3-aciertos').innerText = juego3Aciertos;
+        } else {
+            btnElement.classList.add('incorrecto');
+            retroDiv.className = 'retroalimentacion fallo';
+            retroDiv.innerHTML = '❌ Observa bien los emojis. Cada uno es una pista que te lleva a la respuesta correcta.';
+        }
+        retroDiv.style.display = 'block';
+        document.getElementById('juego3-siguiente').style.display = 'inline-block';
+    }
+
+    function siguienteJuego3() {
+        juego3Nivel++;
+        cargarJuego3();
+    }
+
+    // --- FUNCIONES DEL MURO DE COMENTARIOS ---
+    function agregarComentario() {
+        const nombre = document.getElementById('input-nombre').value || 'Detective Anónimo';
+        const texto = document.getElementById('input-comentario').value;
+        if (texto.trim() === '') { alert('⚠️ Por favor, escribe una inferencia o comentario.'); return; }
+        const lista = document.getElementById('lista-comentarios');
+        const nuevoComentario = document.createElement('div');
+        nuevoComentario.className = 'comentario-item';
+        nuevoComentario.style.background = 'linear-gradient(135deg, #E0F7FA 0%, white 100%)';
+        nuevoComentario.style.borderLeft = '6px solid var(--azul-turquesa)';
+        nuevoComentario.innerHTML = `<div class="comentario-autor">🕵️ ${nombre} <span style="font-weight:normal; color:#718096; font-size:0.85rem;">(Pendiente de moderación)</span></div><div style="font-size: 1.05rem;">${texto}</div>`;
+        lista.insertBefore(nuevoComentario, lista.children[1]);
+        document.getElementById('input-nombre').value = '';
+        document.getElementById('input-comentario').value = '';
+        alert('✅ ¡Comentario enviado! El docente lo revisará antes de publicarlo oficialmente.');
+    }
+
+    // Inicializar
+    actualizarBarraProgreso();
+</script>
+</body>
+</html>
